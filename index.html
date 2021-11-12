@@ -1,14 +1,13 @@
 <script>
-
-//Play Game upon loading.
-game();
+//Play Game when page opens.
+playGame();
 
 // returns the computer's randomized choice of either Rock, Paper, or Scissors as a string.
-function computerPlay() {
-    let choice = Math.random() * 3;
-    if(choice < 1) {
+function getComputerChoice() {
+    let computerChoice = Math.random() * 3;
+    if(computerChoice < 1) {
         return "Rock";
-    } else if(choice < 2) {
+    } else if(computerChoice < 2) {
         return "Paper";
     } else return "Scissors";
 }
@@ -51,7 +50,7 @@ function playRound(playerSelection, computerSelection) {
 }
 
 //Plays 5 rounds, keep a rolling score tally and reporting a final winner.
-function game() {
+function playGame() {
 
     let playerScore = 0;
     let computerScore = 0;
@@ -62,7 +61,7 @@ function game() {
         //Ask player for input at start of round
         const playerSelection = prompt("Rock, Paper, or Scissors?");
         //get a new randomized computer selection.
-        const computerSelection = computerPlay();
+        const computerSelection = getComputerChoice();
 
         //Run 1 round of the game simulation
         let roundResult = playRound(playerSelection, computerSelection);
@@ -75,7 +74,7 @@ function game() {
         } else if(roundResult === 0) {
             console.log("Tie");
         } else {
-            console.log("Invalid choice. Choose Rock, Paper, or Scissors.");
+            console.log("Invalid computerChoice. Choose Rock, Paper, or Scissors.");
             continue;
         }
 
@@ -89,13 +88,6 @@ function game() {
     } else {
         console.log("You Win!!!!");
     }
-    console.log(`FINAL SCORE\nYou: ${playerScore}\nComputer: ${computerScore}`);
-
+    return console.log(`FINAL SCORE\nYou: ${playerScore} \nComputer: ${computerScore}`);
 }
-
-
-// POSSIBLE THEME VIA KARNEN: TROPICAL PARADISE. OPTIONAL PINEAPPLES. ROCK IS COCONUT, PAPER IS BANANA LEAF AND SCISSORS IS A CRAB OBVI. 
-// STRETCH GOAL: PATAGONIA THEME. THE PLACE NOT DA BRAND.
-
-
 </script>
