@@ -1,93 +1,109 @@
-<script>
-//Play Game when page opens.
-playGame();
-
-// returns the computer's randomized choice of either Rock, Paper, or Scissors as a string.
-function getComputerChoice() {
-    let computerChoice = Math.random() * 3;
-    if(computerChoice < 1) {
-        return "Rock";
-    } else if(computerChoice < 2) {
-        return "Paper";
-    } else return "Scissors";
-}
-
-// Game logic for one round that compares user input to computer generated choice and determines winner by returning a string describing win/lose.
-function playRound(playerSelection, computerSelection) {
-    playerSelection = playerSelection.toLowerCase();
-    console.log(playerSelection);
-    switch(playerSelection) {
-        case "rock":
-            if(computerSelection === "Scissors") {
-                return 2;
-            } else if(computerSelection === "Paper"){
-                return 1;
-            } else {
-                return 0;
-            }
-            break;
-        case "paper":
-            if(computerSelection === "Rock") {
-                return 2;
-            } else if(computerSelection === "Scissors"){
-                return 1;
-            } else {
-                return 0;
-            }
-            break;
-        case "scissors":
-            if(computerSelection === "Paper") {
-                return 2;
-            } else if(computerSelection === "Rock"){
-                return 1;
-            } else {
-                return 0;
-            }
-            break;
-        default:
-            return -1;
-    }
-}
-
-//Plays 5 rounds, keep a rolling score tally and reporting a final winner.
-function playGame() {
-
-    let playerScore = 0;
-    let computerScore = 0;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+    //Play Game when page opens.
+    playGame();
     
-    //Loop through rounds of play until a player gets to 5.
-    while(playerScore < 5 && computerScore < 5) {
-
-        //Ask player for input at start of round
-        const playerSelection = prompt("Rock, Paper, or Scissors?");
-        //get a new randomized computer selection.
-        const computerSelection = getComputerChoice();
-
-        //Run 1 round of the game simulation
-        let roundResult = playRound(playerSelection, computerSelection);
-        if(roundResult === 2) {
-            playerScore++;
-            console.log("Win");
-        } else if(roundResult === 1) {
-            computerScore++;
-            console.log("Lose");
-        } else if(roundResult === 0) {
-            console.log("Tie");
-        } else {
-            console.log("Invalid computerChoice. Choose Rock, Paper, or Scissors.");
-            continue;
+    // returns the computer's randomized choice of either Rock, Paper, or Scissors as a string.
+    function getComputerChoice() {
+        let computerChoice = Math.random() * 3;
+        if(computerChoice < 1) {
+            return "Rock";
+        } else if(computerChoice < 2) {
+            return "Paper";
+        } else return "Scissors";
+    }
+    
+    // Game logic for one round that compares user input to computer generated choice and determines winner by returning a string describing win/lose.
+    function playRound(playerSelection, computerSelection) {
+        playerSelection = playerSelection.toLowerCase();
+        console.log(playerSelection);
+        switch(playerSelection) {
+            case "rock":
+                if(computerSelection === "Scissors") {
+                    return 2;
+                } else if(computerSelection === "Paper"){
+                    return 1;
+                } else {
+                    return 0;
+                }
+                break;
+            case "paper":
+                if(computerSelection === "Rock") {
+                    return 2;
+                } else if(computerSelection === "Scissors"){
+                    return 1;
+                } else {
+                    return 0;
+                }
+                break;
+            case "scissors":
+                if(computerSelection === "Paper") {
+                    return 2;
+                } else if(computerSelection === "Rock"){
+                    return 1;
+                } else {
+                    return 0;
+                }
+                break;
+            default:
+                return -1;
         }
-
-        //At the end of the current round, gives a score update
-        console.log(`Your Score: ${playerScore} \nComputer Score: ${computerScore}\n`);
     }
+    
+    // //Plays 5 rounds, keep a rolling score tally and reporting a final winner.
+    // function playGame() {
+    
+    //     let playerScore = 0;
+    //     let computerScore = 0;
+        
+    //     //Loop through rounds of play until a player gets to 5.
+    //     while(playerScore < 5 && computerScore < 5) {
+    
+    //         //Ask player for input at start of round
+    //         const playerSelection = prompt("Rock, Paper, or Scissors?");
+    //         //get a new randomized computer selection.
+    //         const computerSelection = getComputerChoice();
+    
+    //         //Run 1 round of the game simulation
+    //         let roundResult = playRound(playerSelection, computerSelection);
+    //         if(roundResult === 2) {
+    //             playerScore++;
+    //             console.log("Win");
+    //         } else if(roundResult === 1) {
+    //             computerScore++;
+    //             console.log("Lose");
+    //         } else if(roundResult === 0) {
+    //             console.log("Tie");
+    //         } else {
+    //             console.log("Invalid computerChoice. Choose Rock, Paper, or Scissors.");
+    //             continue;
+    //         }
+    
+    //         //At the end of the current round, gives a score update
+    //         console.log(`Your Score: ${playerScore} \nComputer Score: ${computerScore}\n`);
+    //     }
+    
+    //     //Print the winner and final score
+    //     if(computerScore === 5) {
+    //         console.log("The computer wins!");
+    //     } else {
+    //         console.log("You Win!!!!");
+    //     }
+    //     return console.log(`FINAL SCORE\nYou: ${playerScore} \nComputer: ${computerScore}`);
+    // }
+    </script>
+</head>
+<body>
+    
+    <button>Rock</button>
+    <button>Paper</button>
+    <button>Scissors</button>
 
-    //Print the winner and final score
-    if(computerScore === 5) {
-        console.log("The computer wins!");
-    } else {
-        console.log("You Win!!!!");
-    }
-    return console.log(`FINAL SCORE\nYou: ${playerScore} \nComputer: ${computerScore}`);
-}
-</script>
+</body>
+</html>
