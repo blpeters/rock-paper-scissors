@@ -2,12 +2,14 @@
 let playerScore = 0;
 let computerScore = 0;
 
-const selections = document.querySelectorAll('button');
+const Selections = document.querySelectorAll('button');
+const ResultText = document.querySelector(".results");
+const Summary = document.querySelector(".summary");
 
-selections.forEach((selection) => {
+Selections.forEach((selection) => {
     selection.addEventListener('click', () => {
         let roundResult = playRound(selection.textContent, getComputerChoice());
-        playGame(roundResult);
+        reportResults(roundResult);
     });
 });
 
@@ -27,7 +29,6 @@ function getComputerChoice() {
 
 function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
-    console.log(playerSelection);
     switch(playerSelection) {
         case "rock":
             if(computerSelection === "Scissors") {
@@ -61,36 +62,39 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function playGame(roundResult) {
-
-
-    //Run 1 round of the game simulation
+function reportResults(roundResult) {
+ 
     if(roundResult === 2) {
         playerScore++;
-        console.log("Win");
+        ResultText.textContent = "Round Won";
     } else if(roundResult === 1) {
         computerScore++;
-        console.log("Lose");
+        ResultText.textContent = "Round Lost";
     } else if(roundResult === 0) {
-        console.log("Tie");
-    } else {
-        console.log("Invalid computerChoice. Choose Rock, Paper, or Scissors.");
-    }
+        ResultText.textContent = "Round Tie";
+    } 
 
+    //Will break out of the function if a winner is determined because the current score does not need to be reported again. final score is reported in the checkForWinner function.
+    if(checkForWinner()) {
+        return;
+    };
+    reportCurrentScore();
+}
+
+function reportCurrentScore() {
+    Summary.textContent = `Your Score: ${playerScore} \nComputer Score: ${computerScore}\n`;
+}
+
+function checkForWinner() {
     if(playerScore === 5) {
-        console.log("You Win!");
+        Summary.textContent = `You Win the Game!\nFINAL SCORE: ${playerScore} - ${computerScore}`;
         playerScore = 0;
         computerScore = 0;
-        return;
-    }
-    if(computerScore === 5) {
-        console.log("You Lose!");
+        return 1;
+    } else if(computerScore === 5) {
+        Summary.textContent = `You Lost the game...\nFINAL SCORE: ${computerScore} - ${playerScore}`;
         playerScore = 0;
         computerScore = 0;
-        return;
-    }
-    
-    //At the end of the current round, gives a score update
-    console.log(`Your Score: ${playerScore} \nComputer Score: ${computerScore}\n`);
-
+        return 1;
+    } else return 0;
 }
